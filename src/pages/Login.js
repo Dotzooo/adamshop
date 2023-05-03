@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import axios from "axios";
 
@@ -11,20 +11,24 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        console.log(name)
-        console.log(value)
         setstate({...state, [name] : value});
     }
     
-    const submit = async () => { 
+    const submit = async () => {
         const res = await axios.post('/v2/admin/signin', state);
         console.log(res)
 
-        const { token } = res.data;
-        axios.defaults.headers.common['Authorization'] = token;
+        const { token, expired } = res.data;
+        // axios.defaults.headers.common['Authorization'] = token;
+        document.cookie = `token=${token}; expires=${new Date(expired)}`
 
     }
     
+    useEffect(() => {
+
+    }, []);
+
+
     
     return (
         <div className="container py-5">
