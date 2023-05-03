@@ -1,13 +1,19 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 function Login() {
+
+    const navigate = useNavigate()
     
     const [state, setstate] = useState({
         username: '',
         password: '',
     });
+
+    const [ loginMsg, setLoginMsg] = useState('')
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -15,29 +21,33 @@ function Login() {
     }
     
     const submit = async () => {
-        const res = await axios.post('/v2/admin/signin', state);
-        console.log(res)
-
-        const { token, expired } = res.data;
-        // axios.defaults.headers.common['Authorization'] = token;
-        document.cookie = `token=${token}; expires=${new Date(expired)}`
-
+        try {
+            const res = await axios.post('/v2/admin/signin', state);
+    
+            const { token, expired } = res.data;
+            // axios.defaults.headers.common['Authorization'] = token;
+    
+            // 儲存 token
+            document.cookie = `token=${token}; expires=${new Date(expired)}`
+    
+            if (res.data.success) {
+                navigate('/admin/products')
+            }
+            
+        } catch (error) {
+            setLoginMsg(error.response.data.message)
+            // console.log(error.response.data.message)
+        }
     }
-    
-    useEffect(() => {
 
-    }, []);
-
-
-    
     return (
         <div className="container py-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h2>登入帳號</h2>
 
-                    <div className="alert alert-danger" role="alert">
-                        錯誤訊息
+                    <div className={`alert alert-danger ${loginMsg ? 'd-block' : 'd-none'}`} role="alert">
+                        {loginMsg}
                     </div>
                     <div className="mb-2">
                         <label htmlFor="email" className="form-label w-100">
