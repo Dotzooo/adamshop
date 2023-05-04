@@ -6,13 +6,6 @@ function AdminProducts() {
 
 
     useEffect(() => {
-        // get token
-        const token = document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('token='))
-            ?.split('=')[1];
-        
-        axios.defaults.headers.common['Authorization'] = token;
 
         (async () => {
             const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products/all`)
