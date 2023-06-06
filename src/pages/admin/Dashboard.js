@@ -1,14 +1,14 @@
-
-import { useEffect } from "react";
 import { Outlet, useNavigate, Link } from "react-router-dom";
-
-import Message from '../../components/Message'
 import axios from 'axios';
+import { useEffect, useReducer } from "react";
+
+import Message from '../../components/Message';
+import { MessageContext, messageReducer, initState } from '../../store/messageStore';
 
 function Dashboard() {
 
     const navigate = useNavigate();
-
+    const reducer = useReducer(messageReducer, initState);
 
     // get token
     const token = document.cookie
@@ -44,7 +44,7 @@ function Dashboard() {
     }, [navigate, token]);
 
     return (
-        <>
+        <MessageContext.Provider value={reducer}>
             <Message />
             <nav className="navbar navbar-expand-lg bg-dark">
                 <div className="container-fluid">
@@ -102,7 +102,7 @@ function Dashboard() {
                     {token && <Outlet />}
                 </div>
             </div>
-        </>
+        </ MessageContext.Provider>
     );
 }
 
