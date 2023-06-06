@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminProducts from './pages/admin/AdminProducts';
+import AdminCoupons from './pages/admin/AdminCoupons';
+
 import Dashboard from './pages/admin/Dashboard';
 
 import Login from './pages/Login'
@@ -18,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/admin" element={<Dashboard />}>
           <Route path='products' element={<AdminProducts />}></Route>
+          <Route path='coupons' element={<AdminCoupons />}></Route>
         </Route>
       </Routes>
     </div>
