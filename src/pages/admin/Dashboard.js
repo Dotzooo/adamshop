@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useReducer } from "react";
 
@@ -77,25 +77,25 @@ function Dashboard() {
             <div className="d-flex" style={{ minHeight: "calc(100vh - 56px)" }}>
                 <div className="bg-light" style={{ width: "200px" }}>
                     <ul className="list-group list-group-flush">
-                        <Link
+                        <NavLink
                             href="/"
                             className="list-group-item list-group-item-action py-3"
                             to="/admin/products"
                         >
                             <i className="bi bi-cup-fill me-2" />
                             產品列表
-                        </Link>
-                        <Link href="/" className="list-group-item list-group-item-action py-3" to="/admin/coupons">
+                        </NavLink>
+                        <NavLink href="/" className="list-group-item list-group-item-action py-3" to="/admin/coupons">
                             <i className="bi bi-ticket-perforated-fill me-2" />
                             優惠卷列表
-                        </Link>
-                        <Link href="/"
+                        </NavLink>
+                        <NavLink href="/"
                             className="list-group-item list-group-item-action py-3"
                             to="/admin/orders"
                         >
                             <i className="bi bi-receipt me-2" />
                             訂單列表
-                        </Link>
+                        </NavLink>
                     </ul>
                 </div>
                 <div className="w-100">
