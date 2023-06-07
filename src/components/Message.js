@@ -8,7 +8,7 @@ function Message() {
 
   return (
     <>
-      <button
+      {/* <button
         type="button"
         onClick={() => {
           //   setMessage({
@@ -29,7 +29,7 @@ function Message() {
         }}
       >
         按我
-      </button>
+      </button> */}
       <div
         className="toast-container position-fixed"
         style={{ top: "64px", right: "15px" }}
